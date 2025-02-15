@@ -20,7 +20,7 @@ services:
       timeout: 5s
       retries: 5
 
-  sylcot-backend:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -36,18 +36,8 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
       DB_SSLMODE: ${DB_SSLMODE}
-    volumes:
-      - ./.env:/app/.env
-
-  # frontend:
-  #   build:
-  #     context: ./frontend  # Directorio del proyecto Next.js
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000"
-  #   environment:
-  #     # Agrega variables de entorno que necesites para Next.js
-  #     NODE_ENV: production
+    env_file:
+      - .env
 
 volumes:
   mysql_data:
